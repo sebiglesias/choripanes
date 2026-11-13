@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Choripanes | ¿Cuántos chorizos por persona calcular?</title>
+    <meta name="description" content="Calculadora interactiva de choripanes para asados y juntadas. Calculá cuántos chorizos, kilos de pan, chimichurri, salsa criolla y carbón para tu grupo. Lista para WhatsApp.">
+    <meta name="keywords" content="cuantos chorizos por persona, calculadora choripanes, calcular chorizos asado, cuanto pan para choripan, asado amigos">
+    <link rel="canonical" href="https://sebiglesias.com.ar/choripanes/">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Calculadora de Choripanes | Calculá chorizos, pan y salsas">
+    <meta property="og:description" content="¿Hacés una choripaneada? Calculá exacto cuántos chorizos, flautitas de pan y aderezos necesitás según la cantidad de personas.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sebiglesias.com.ar/choripanes/">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            900: '#7c2d12',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2BNDBQP0W7"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2BNDBQP0W7');
+    </script>
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3381238987477190" crossorigin="anonymous"></script>
+
+    <!-- Schema.org WebApplication & FAQPage -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "name": "Calculadora de Choripanes",
+          "url": "https://sebiglesias.com.ar/choripanes/",
+          "applicationCategory": "UtilityApplication",
+          "operatingSystem": "All",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          },
+          "description": "Calculadora de chorizos, panes, chimichurri y carbón para choripaneadas y juntadas con amigos."
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Cuántos chorizos se calculan por persona para una choripaneada?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Si el menú es exclusivamente choripán, se calculan 2 a 2.5 chorizos por adulto (o 1.5 a 2 unidades si hay variedad de ensaladas). Para niños o personas de poco comer, 1 unidad suele ser suficiente."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cuánto pan se calcula para un choripán?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Se calcula 1 pan francés chico, flautita o miñón por cada chorizo (unos 60 a 80 gramos de pan por unidad), más un 15% adicional de reserva para repetir o mojar salsas."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+</head>
+<body class="bg-stone-100 text-stone-800 antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-stone-200 sticky top-0 z-20">
+        <div class="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <span class="text-2xl">🌭</span>
+                <div>
+                    <h1 class="text-lg font-bold text-stone-900 leading-tight">Calculadora de Choripanes</h1>
+                    <p class="text-xs text-stone-500">¿Cuántos chorizos y pan comprar para tu juntada?</p>
+                </div>
+            </div>
+            <a href="https://sebiglesias.com.ar" class="text-xs font-medium text-orange-600 hover:text-orange-700 bg-orange-50 px-2.5 py-1 rounded-full border border-orange-200">
+                ← Más microapps
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-3xl mx-auto px-4 py-6 w-full flex-grow space-y-6">
+
+        <!-- Calculator Card (Above The Fold) -->
+        <section class="bg-white rounded-2xl shadow-sm border border-stone-200 p-5 md:p-6 space-y-5">
+            
+            <h2 class="text-base font-semibold text-stone-900 flex items-center gap-2">
+                <span>👥</span> ¿Quiénes van a comer?
+            </h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <!-- Adultos Comer Bien -->
+                <div class="bg-stone-50 rounded-xl p-3 border border-stone-200 text-center">
+                    <label class="block text-xs font-medium text-stone-600 mb-1">Comen bien (hambre)</label>
+                    <div class="text-2xl font-bold text-stone-900 mb-2" id="val-bien">10</div>
+                    <div class="flex justify-center items-center gap-3">
+                        <button onclick="adjust('bien', -1)" class="w-9 h-9 rounded-full bg-white border border-stone-300 font-bold text-stone-700 hover:bg-stone-100 active:scale-95 text-lg flex items-center justify-center">-</button>
+                        <button onclick="adjust('bien', 1)" class="w-9 h-9 rounded-full bg-orange-500 text-white font-bold hover:bg-orange-600 active:scale-95 text-lg flex items-center justify-center">+</button>
+                    </div>
+                </div>
+
+                <!-- Adultos Normal / Moderado -->
+                <div class="bg-stone-50 rounded-xl p-3 border border-stone-200 text-center">
+                    <label class="block text-xs font-medium text-stone-600 mb-1">Comen moderado</label>
+                    <div class="text-2xl font-bold text-stone-900 mb-2" id="val-mod">4</div>
+                    <div class="flex justify-center items-center gap-3">
+                        <button onclick="adjust('mod', -1)" class="w-9 h-9 rounded-full bg-white border border-stone-300 font-bold text-stone-700 hover:bg-stone-100 active:scale-95 text-lg flex items-center justify-center">-</button>
+                        <button onclick="adjust('mod', 1)" class="w-9 h-9 rounded-full bg-orange-500 text-white font-bold hover:bg-orange-600 active:scale-95 text-lg flex items-center justify-center">+</button>
+                    </div>
+                </div>
+
+                <!-- Niños -->
+                <div class="bg-stone-50 rounded-xl p-3 border border-stone-200 text-center">
+                    <label class="block text-xs font-medium text-stone-600 mb-1">Niños / Menores</label>
+                    <div class="text-2xl font-bold text-stone-900 mb-2" id="val-ninos">2</div>
+                    <div class="flex justify-center items-center gap-3">
+                        <button onclick="adjust('ninos', -1)" class="w-9 h-9 rounded-full bg-white border border-stone-300 font-bold text-stone-700 hover:bg-stone-100 active:scale-95 text-lg flex items-center justify-center">-</button>
+                        <button onclick="adjust('ninos', 1)" class="w-9 h-9 rounded-full bg-orange-500 text-white font-bold hover:bg-orange-600 active:scale-95 text-lg flex items-center justify-center">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Opciones extra -->
+            <div class="pt-3 border-t border-stone-100 flex flex-wrap gap-4 text-xs font-medium text-stone-700">
+                <label class="inline-flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" id="chk-mariposa" checked onchange="calc()" class="w-4 h-4 text-orange-600 rounded border-stone-300 focus:ring-orange-500">
+                    <span>A la mariposa (más rápido y parejo)</span>
+                </label>
+                <label class="inline-flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" id="chk-morcipan" onchange="calc()" class="w-4 h-4 text-orange-600 rounded border-stone-300 focus:ring-orange-500">
+                    <span>Sumar morcillas (morcipán)</span>
+                </label>
+            </div>
+
+            <!-- Resultados -->
+            <div class="bg-gradient-to-br from-orange-500 to-amber-600 rounded-xl p-5 text-white shadow-sm space-y-4">
+                <div class="flex items-center justify-between border-b border-orange-400/40 pb-3">
+                    <span class="text-xs uppercase tracking-wider font-semibold text-orange-100">Lista de Compras Recomendada</span>
+                    <span class="text-xs font-bold bg-white/20 px-2.5 py-0.5 rounded-full" id="txt-personas">16 personas</span>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+                    <div class="bg-white/10 rounded-lg p-2.5 backdrop-blur-sm">
+                        <div class="text-2xl sm:text-3xl font-extrabold" id="res-choris">33</div>
+                        <div class="text-xs text-orange-100 mt-0.5" id="lbl-choris">Chorizos (unidades)</div>
+                    </div>
+                    <div class="bg-white/10 rounded-lg p-2.5 backdrop-blur-sm">
+                        <div class="text-2xl sm:text-3xl font-extrabold" id="res-pan-kg">2.8 kg</div>
+                        <div class="text-xs text-orange-100 mt-0.5" id="res-pan-uni">~36 pancitos</div>
+                    </div>
+                    <div class="bg-white/10 rounded-lg p-2.5 backdrop-blur-sm">
+                        <div class="text-2xl sm:text-3xl font-extrabold" id="res-carbon">8 kg</div>
+                        <div class="text-xs text-orange-100 mt-0.5">Carbón vegetal</div>
+                    </div>
+                    <div class="bg-white/10 rounded-lg p-2.5 backdrop-blur-sm">
+                        <div class="text-2xl sm:text-3xl font-extrabold" id="res-salsas">600 g</div>
+                        <div class="text-xs text-orange-100 mt-0.5">Chimi / Criolla</div>
+                    </div>
+                </div>
+
+                <div id="box-morcipan" class="hidden bg-black/15 rounded-lg p-2 text-xs text-orange-100 text-center">
+                    🥩 Con opción morcipán: <span class="font-bold text-white" id="res-morcis">8 morcillas</span> + <span class="font-bold text-white" id="res-choris-mix">25 chorizos</span>.
+                </div>
+
+                <!-- Botones de Acción -->
+                <div class="pt-2 flex flex-col sm:flex-row gap-2">
+                    <button onclick="shareWhatsApp()" class="w-full py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 active:scale-[0.99] text-white font-semibold rounded-lg text-sm flex items-center justify-center gap-2 transition shadow-sm">
+                        <span>📲</span> Enviar lista por WhatsApp
+                    </button>
+                    <button onclick="copyList()" id="btn-copy" class="w-full sm:w-auto py-2.5 px-4 bg-white/20 hover:bg-white/30 text-white font-semibold rounded-lg text-sm transition">
+                        Copiar lista
+                    </button>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Anuncio AdSense Reservado (Zero CLS) -->
+        <div class="w-full min-h-[100px] flex items-center justify-center bg-stone-50 border border-dashed border-stone-300 rounded-xl text-stone-400 text-xs">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-3381238987477190"
+                 data-ad-slot="auto"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <!-- Guía y Preguntas Frecuentes (SEO & E-E-A-T) -->
+        <section class="bg-white rounded-2xl border border-stone-200 p-6 space-y-5 text-stone-700 text-sm">
+            <h2 class="text-lg font-bold text-stone-900">Reglas maestras para la choripaneada perfecta</h2>
+
+            <div class="space-y-3">
+                <h3 class="font-semibold text-stone-900">¿Cuánto se calcula exactamente por persona?</h3>
+                <ul class="list-disc pl-5 space-y-1 text-stone-600">
+                    <li><strong>Comilones (hambre de peña):</strong> 2.5 chorizos (aprox. 300g de carne + 2 panes flautita).</li>
+                    <li><strong>Comensal promedio:</strong> 1.5 a 2 chorizos.</li>
+                    <li><strong>Niños o porción chica:</strong> 1 chorizo.</li>
+                </ul>
+            </div>
+
+            <div class="space-y-3">
+                <h3 class="font-semibold text-stone-900">¿Qué tipo de pan conviene pedir en la panadería?</h3>
+                <p class="text-stone-600">
+                    Lo ideal es pedir <strong>pancitos flauta individuales</strong> (de unos 70 gramos c/u) o <strong>miñones</strong> frescos con corteza crocante pero miga suave para absorber los jugos. Evitá panes de molde o panes dulces que se ablandan enseguida.
+                </p>
+            </div>
+
+            <div class="space-y-3">
+                <h3 class="font-semibold text-stone-900">¿Puro cerdo o mezcla vacuno-cerdo?</h3>
+                <p class="text-stone-600">
+                    Los chorizos <strong>puro cerdo</strong> tienen mejor terneza y sabor si se hacen a fuego medio constante. Los de <strong>mezcla (cerdo y vaca)</strong> resisten mejor si querés abrirlos "a la mariposa" en la parrilla para que queden crocantes por fuera y bien cocidos en tiempo récord.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-stone-200 py-6 text-center text-xs text-stone-500">
+        <p>Herramienta 100% gratuita creada por <a href="https://sebiglesias.com.ar" class="text-stone-700 font-semibold hover:underline">Sebastián Iglesias</a> · Sin registro ni descargas.</p>
+    </footer>
+
+    <!-- Script de cálculo -->
+    <script>
+        const state = {
+            bien: 10,
+            mod: 4,
+            ninos: 2
+        };
+
+        function adjust(key, delta) {
+            state[key] = Math.max(0, state[key] + delta);
+            document.getElementById('val-' + key).textContent = state[key];
+            calc();
+        }
+
+        function calc() {
+            const totalPersonas = state.bien + state.mod + state.ninos;
+            document.getElementById('txt-personas').textContent = `${totalPersonas} personas`;
+
+            if (totalPersonas === 0) {
+                document.getElementById('res-choris').textContent = 0;
+                document.getElementById('res-pan-kg').textContent = '0 kg';
+                document.getElementById('res-pan-uni').textContent = '0 panes';
+                document.getElementById('res-carbon').textContent = '0 kg';
+                document.getElementById('res-salsas').textContent = '0 g';
+                return;
+            }
+
+            // Chorizos: 2.5 por bien, 1.75 por mod, 1.0 por ninos
+            const totalChoris = Math.ceil((state.bien * 2.5) + (state.mod * 1.75) + (state.ninos * 1.0));
+            
+            // Panes: 1 pan por chorizo + 10% margen
+            const totalPanes = Math.ceil(totalChoris * 1.1);
+            const totalPanKg = (totalPanes * 0.075).toFixed(1); // 75g aprox por flautita
+
+            // Carbon: 1 bolsa (4kg) cada 8 personas, minimo 4kg
+            const carbonKg = Math.max(4, Math.ceil(totalPersonas / 7) * 4);
+
+            // Salsas (chimi / criolla): 35g por persona
+            const salsaGramos = Math.round(totalPersonas * 35);
+
+            document.getElementById('res-choris').textContent = totalChoris;
+            document.getElementById('res-pan-kg').textContent = `${totalPanKg} kg`;
+            document.getElementById('res-pan-uni').textContent = `~${totalPanes} pancitos`;
+            document.getElementById('res-carbon').textContent = `${carbonKg} kg`;
+            document.getElementById('res-salsas').textContent = `${salsaGramos} g`;
+
+            // Morcipan option
+            const chkMorci = document.getElementById('chk-morcipan').checked;
+            const boxMorci = document.getElementById('box-morcipan');
+            if (chkMorci) {
+                boxMorci.classList.remove('hidden');
+                const morcis = Math.ceil(totalPersonas * 0.5);
+                const chorisRest = Math.max(0, totalChoris - Math.ceil(morcis * 0.8));
+                document.getElementById('res-morcis').textContent = `${morcis} morcillas`;
+                document.getElementById('res-choris-mix').textContent = `${chorisRest} chorizos`;
+            } else {
+                boxMorci.classList.add('hidden');
+            }
+        }
+
+        function getShareText() {
+            const totalPersonas = state.bien + state.mod + state.ninos;
+            const choris = document.getElementById('res-choris').textContent;
+            const panKg = document.getElementById('res-pan-kg').textContent;
+            const panUni = document.getElementById('res-pan-uni').textContent;
+            const carbon = document.getElementById('res-carbon').textContent;
+            const salsas = document.getElementById('res-salsas').textContent;
+
+            return `🌭 *LISTA DE COMPRAS PARA LA CHORIPANEADA* (${totalPersonas} personas)\n\n` +
+                   `• ${choris} Chorizos\n` +
+                   `• ${panKg} de pan (${panUni})\n` +
+                   `• ${carbon} de carbón vegetal\n` +
+                   `• ${salsas} de Chimichurri / Salsa Criolla\n\n` +
+                   `Calculado gratis con: https://sebiglesias.com.ar/choripanes/`;
+        }
+
+        function shareWhatsApp() {
+            const text = encodeURIComponent(getShareText());
+            window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+        }
+
+        function copyList() {
+            navigator.clipboard.writeText(getShareText()).then(() => {
+                const btn = document.getElementById('btn-copy');
+                const old = btn.textContent;
+                btn.textContent = '¡Copiado! ✓';
+                setTimeout(() => btn.textContent = old, 2000);
+            });
+        }
+
+        // Init
+        calc();
+    </script>
+</body>
+</html>
